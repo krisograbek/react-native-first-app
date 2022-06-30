@@ -22,12 +22,14 @@ export default function App() {
         <TextInput style={styles.textInput} placeholder="Your goal" onChangeText={handleGoalInput} />
         <Button title="Add Goal" onPress={handleAddGoal} />
       </View>
-      <ScrollView style={styles.goalsContainer}>
-        {/* <Text>List of goals</Text> */}
-        {goalsList.map((goal, i) => (
-          <Text key={i} style={styles.goalItem}>{goal}</Text>
-        ))}
-      </ScrollView>
+      <View style={styles.goalsContainer}>
+        <ScrollView >
+          {/* <Text>List of goals</Text> */}
+          {goalsList.map((goal, i) => (
+            <Text key={i} style={styles.goalItem}>{goal}</Text>
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
