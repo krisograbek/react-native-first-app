@@ -19,10 +19,14 @@ export default function App() {
     setGoalsList(prevState => prevState.filter((goal) => goal.key !== id));
   }
 
+  const endAddGoal = () => {
+    setModalIsVisible(false);
+  }
+
   return (
     <View style={styles.appContainer}>
       <Button title='Add a new goal' onPress={() => setModalIsVisible(true)} />
-      <GoalInput handleAddGoal={handleAddGoal} showModal={modalIsVisible} />
+      <GoalInput handleAddGoal={handleAddGoal} showModal={modalIsVisible} endAddGoal={endAddGoal} />
       <View style={styles.goalsContainer}>
         <FlatList data={goalsList}
           renderItem={(itemData) => (
