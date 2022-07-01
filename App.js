@@ -1,18 +1,12 @@
 import { useState } from 'react';
-import { Button, FlatList, StyleSheet, TextInput, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import GoalInput from './components/GoalInput';
 import GoalItem from './components/GoalItem';
 
 export default function App() {
+  const [goalsList, setGoalsList] = useState([]);
 
-  const [newGoal, setNewGoal] = useState("")
-  const [goalsList, setGoalsList] = useState([])
-
-  const handleGoalInput = enteredText => {
-    setNewGoal(enteredText)
-  }
-
-  const handleAddGoal = () => {
+  const handleAddGoal = (newGoal) => {
     // using a callback with the previous state is the recommended way of updating state
     // when it depends on the previous state
     setGoalsList(prevState => [...prevState, { text: newGoal, key: Math.random().toString() }])
@@ -20,7 +14,7 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput handleGoalInput={handleGoalInput} handleAddGoal={handleAddGoal} />
+      <GoalInput handleAddGoal={handleAddGoal} />
       <View style={styles.goalsContainer}>
         <FlatList data={goalsList}
           renderItem={(itemData) => <GoalItem text={itemData.item.text} />}
