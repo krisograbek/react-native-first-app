@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button, ScrollView, StyleSheet, Text, TextInput, View, FlatList } from 'react-native';
+import GoalItem from './components/GoalItem';
 
 export default function App() {
 
@@ -13,7 +14,7 @@ export default function App() {
   const handleAddGoal = () => {
     // using a callback with the previous state is the recommended way of updating state
     // when it depends on the previous state
-    setGoalsList(prevState => [...prevState, newGoal])
+    setGoalsList(prevState => [...prevState, { text: newGoal, key: Math.random().toString() }])
   }
 
   return (
@@ -23,11 +24,14 @@ export default function App() {
         <Button title="Add Goal" onPress={handleAddGoal} />
       </View>
       <View style={styles.goalsContainer}>
-        <FlatList data={goalsList} renderItem={(itemData) => {
-          return (
-            <Text style={styles.goalItem}>{itemData.item}</Text>
-          )
-        }} />
+        <FlatList data={goalsList}
+          renderItem={(itemData) => {
+            return (
+              <GoalItem styles={styles} itemData={itemData} />
+            )
+          }}
+        // keyExtractor={item => item.id}
+        />
       </View>
     </View>
   );
