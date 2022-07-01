@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { Button, FlatList, StyleSheet, View } from 'react-native';
 import GoalInput from './components/GoalInput';
 import GoalItem from './components/GoalItem';
 
 export default function App() {
   const [goalsList, setGoalsList] = useState([]);
+  const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const handleAddGoal = (newGoal) => {
     // using a callback with the previous state is the recommended way of updating state
     // when it depends on the previous state
-    setGoalsList(prevState => [...prevState, { text: newGoal, key: Math.random().toString() }])
+    setGoalsList(prevState => [...prevState, { text: newGoal, key: Math.random().toString() }]);
+    setModalIsVisible(false);
   }
 
   const handleDelete = (id) => {
@@ -19,7 +21,8 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput handleAddGoal={handleAddGoal} />
+      <Button title='Add a new goal' onPress={() => setModalIsVisible(true)} />
+      <GoalInput handleAddGoal={handleAddGoal} showModal={modalIsVisible} />
       <View style={styles.goalsContainer}>
         <FlatList data={goalsList}
           renderItem={(itemData) => (

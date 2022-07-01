@@ -9,7 +9,7 @@ const GoalItem = ({ id, text, handleDelete }) => {
   return (
     // the following bind() is new to me and I should
     // learn more to understand, we exactly happens here
-    <Pressable onPress={handleDeleteItem}>
+    <Pressable android_ripple={{ color: "#ddd" }} onPress={handleDeleteItem}>
       <Text style={styles.goalItem}>{text} </Text>
     </Pressable>
   )
