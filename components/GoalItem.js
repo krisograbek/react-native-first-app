@@ -1,9 +1,17 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { Pressable, StyleSheet, Text } from 'react-native'
 
-const GoalItem = ({ text }) => {
+const GoalItem = ({ id, text, handleDelete }) => {
+
+  const handleDeleteItem = () => {
+    handleDelete(id);
+  }
   return (
-    <Text style={styles.goalItem}>{text} </Text>
+    // the following bind() is new to me and I should
+    // learn more to understand, we exactly happens here
+    <Pressable onPress={handleDeleteItem}>
+      <Text style={styles.goalItem}>{text} </Text>
+    </Pressable>
   )
 }
 

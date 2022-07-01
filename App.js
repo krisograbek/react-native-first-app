@@ -12,12 +12,23 @@ export default function App() {
     setGoalsList(prevState => [...prevState, { text: newGoal, key: Math.random().toString() }])
   }
 
+  const handleDelete = (id) => {
+    // it's better to filter by id, because they are unique
+    setGoalsList(prevState => prevState.filter((goal) => goal.key !== id));
+  }
+
   return (
     <View style={styles.appContainer}>
       <GoalInput handleAddGoal={handleAddGoal} />
       <View style={styles.goalsContainer}>
         <FlatList data={goalsList}
-          renderItem={(itemData) => <GoalItem text={itemData.item.text} />}
+          renderItem={(itemData) => (
+            <GoalItem
+              text={itemData.item.text}
+              id={itemData.item.key}
+              handleDelete={handleDelete}
+            />
+          )}
         />
       </View>
     </View>
